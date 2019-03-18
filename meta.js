@@ -11,7 +11,9 @@ const pkg = require('./package.json')
 
 const templateVersion = pkg.version
 
-const { addTestAnswers } = require('./scenarios')
+const {
+  addTestAnswers
+} = require('./scenarios')
 
 module.exports = {
   metalsmith: {
@@ -31,7 +33,7 @@ module.exports = {
       return templateVersion
     },
   },
-  
+
   prompts: {
     name: {
       when: 'isNotTest',
@@ -51,19 +53,21 @@ module.exports = {
       type: 'string',
       message: 'Author',
     },
+    vuex: {
+      type: "confirm",
+      message: "Install vuex?"
+    },
     build: {
       when: 'isNotTest',
       type: 'list',
       message: 'Vue build',
-      choices: [
-        {
+      choices: [{
           name: 'Runtime + Compiler: recommended for most users',
           value: 'standalone',
           short: 'standalone',
         },
         {
-          name:
-            'Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-specific HTML) are ONLY allowed in .vue files - render functions are required elsewhere',
+          name: 'Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-specific HTML) are ONLY allowed in .vue files - render functions are required elsewhere',
           value: 'runtime',
           short: 'runtime',
         },
@@ -83,8 +87,7 @@ module.exports = {
       when: 'isNotTest && lint',
       type: 'list',
       message: 'Pick an ESLint preset',
-      choices: [
-        {
+      choices: [{
           name: 'Standard (https://github.com/standard/standard)',
           value: 'standard',
           short: 'Standard',
@@ -110,8 +113,7 @@ module.exports = {
       when: 'isNotTest && unit',
       type: 'list',
       message: 'Pick a test runner',
-      choices: [
-        {
+      choices: [{
           name: 'Jest',
           value: 'jest',
           short: 'jest',
@@ -136,10 +138,8 @@ module.exports = {
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
-      message:
-        'Should we run `npm install` for you after the project has been created? (recommended)',
-      choices: [
-        {
+      message: 'Should we run `npm install` for you after the project has been created? (recommended)',
+      choices: [{
           name: 'Yes, use NPM',
           value: 'npm',
           short: 'npm',
@@ -171,7 +171,9 @@ module.exports = {
     'test/e2e/**/*': 'e2e',
     'src/router/**/*': 'router',
   },
-  complete: function(data, { chalk }) {
+  complete: function (data, {
+    chalk
+  }) {
     const green = chalk.green
 
     sortDependencies(data, green)
