@@ -3,18 +3,21 @@
     <img src="./assets/logo.png"> {{#router}}
     <router-view/> {{else}}
     <HelloWorld/> {{/router}}
+    <Hello/> {{/router}}
   </div>
 </template>
 
 <script>
 {{#unless router}}
 import HelloWorld from './components/HelloWorld'
+import Hello from './components/HelloWorld'
 
 {{/unless}}
 export default {
   name: 'App'{{#router}}{{else}},
   components: {
-    HelloWorld
+    HelloWorld,
+    Hello
   }{{/router}}
 }
 </script>
